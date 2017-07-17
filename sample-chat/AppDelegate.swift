@@ -38,13 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nvc = UINavigationController(rootViewController: self.chatsVC)
         self.window!.rootViewController = nvc
 
-        /*
         // Sync chats.
-        self.notifications.deviceToken
+        self.chats.chats
             .asObservable()
-            .bind(to: self.notificationsVC.deviceToken)
+            .bind(to: self.chatsVC.chats)
             .disposed(by: disposeBag)
-        */
     }
 
     // MARK: - Core Data stack

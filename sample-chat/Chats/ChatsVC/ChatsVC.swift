@@ -4,8 +4,12 @@ import RxSwift
 import UIKit
 
 class ChatsVC : UIViewController, UITableViewDataSource {
+    
+    enum Const {
+        static let ChatsCell = "ChatsCell"
+    }
 
-    // MARK: PUBLIC
+    // MARK PUBLIC
 
     let chats: Variable<[String]> = Variable([])
 
@@ -14,7 +18,7 @@ class ChatsVC : UIViewController, UITableViewDataSource {
         self.setup()
     }
 
-    // MARK: PRIVATE
+    // MARK PRIVATE
 
     @IBOutlet var tableView: UITableView!
 
@@ -27,24 +31,26 @@ class ChatsVC : UIViewController, UITableViewDataSource {
     }
 
     private func setupChats() {
-        /*
-        self.deviceToken
-            .asObservable()
-            .bind(to: self.deviceTokenTextView.rx.text)
-            .disposed(by: disposeBag)
-        */
-        let cellNib = UINib(nibName: "ChatsCell", bundle: nil)
-        self.tableView.register(cellNib, forCellReuseIdentifier: "ChatsCell")
-        
+        let cellNib = UINib(nibName: Const.ChatsCell, bundle: nil)
+        self.tableView.register(
+            cellNib,
+            forCellReuseIdentifier: Const.ChatsCell)
         self.tableView.dataSource = self
-        self.tableView.reloadData()
+
+        // TODO: Reload table view when items change.
+        self.chats
+            .asObservable()
+            .subscribe(onNext : { chats in
+                NSLog("Chats changed to '\(chats)'")
+                //self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        NSLog("ChatsVC. Number of rows")
-        return 3;
+        return self.chats.value.count
     }
 
     func tableView(
@@ -55,9 +61,11 @@ class ChatsVC : UIViewController, UITableViewDataSource {
 
         let cell =
             tableView.dequeueReusableCell(
-                withIdentifier: "ChatsCell",
+                withIdentifier: Const.ChatsCell,
                 for: indexPath)
-        NSLog("Cell: '\(cell)'")
+            as! ChatsCell
+        cell.title = self.chats.value[indexPath.row]
+        NSLog("Cell id: '\(indexPath.row)' title: '\(cell.title)'")
         return cell
     }
     
