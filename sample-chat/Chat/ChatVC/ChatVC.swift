@@ -13,24 +13,33 @@ class ChatVC : UIViewController, UITableViewDataSource {
 
     let messages: Variable<[String]> = Variable([])
 
+    override var canBecomeFirstResponder: Bool {
+        NSLog("canBecomeFirstResponder")
+        return true;
+    }
+    override var inputAccessoryView: UIView {
+        get {
+            NSLog("inputAccessoryView: '\(self.inputSendView)'")
+            return self.inputSendView
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
+        self.setupChatVC()
     }
 
     // MARK PRIVATE
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
+    private var inputSendView: InputView!
 
     private let disposeBag = DisposeBag()
     
-    private func setup() {
+    private func setupChatVC() {
         self.navigationItem.title = "Chat"
 
-        self.setupChatVC()
-    }
-
-    private func setupChatVC() {
+        self.setupInputView()
         self.setupTableView()
 
         // TODO: Reload table view when items change.
@@ -42,7 +51,18 @@ class ChatVC : UIViewController, UITableViewDataSource {
             })
             .disposed(by: disposeBag)
     }
+ 
+    private func setupInputView() {
+        // Load InputView.
+        self.inputSendView =
+            Bundle.main.loadNibNamed(
+                "InputView",
+                owner: nil,
+                options: nil)?.first as! InputView
+        //self.inputSendView.frame.size = CGSize(width: self.inputSendView.frame.size.width, height: 60)
+        //self.view.addSubview(self.inputSendView)
 
+    }
     private func setupTableView() {
         let cellNib = UINib(nibName: Const.ChatCell, bundle: nil)
         self.tableView.register(

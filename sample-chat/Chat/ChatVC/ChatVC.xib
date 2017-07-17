@@ -20,14 +20,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jEb-wU-9Xf">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jEb-wU-9Xf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="jEb-wU-9Xf" secondAttribute="bottom" id="7vK-dL-d8d"/>
+                <constraint firstAttribute="bottom" secondItem="jEb-wU-9Xf" secondAttribute="bottom" id="8S6-3l-uWh"/>
                 <constraint firstAttribute="trailing" secondItem="jEb-wU-9Xf" secondAttribute="trailing" id="Ows-RD-2dP"/>
                 <constraint firstItem="jEb-wU-9Xf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="id0-O1-8Eg"/>
                 <constraint firstItem="jEb-wU-9Xf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uia-g0-oql"/>
