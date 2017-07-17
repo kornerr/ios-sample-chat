@@ -305,6 +305,7 @@
 				2F199A201F1C89B4005499D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
