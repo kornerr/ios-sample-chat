@@ -11,7 +11,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
 
     enum Const {
         static let ChatCell = "ChatCell"
-        static let SendView = "SendView"
     }
 
     override func viewDidLoad() {
@@ -26,7 +25,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
     private func setupChatVC() {
         self.navigationItem.title = "Chat"
 
-        self.setupSendView()
         self.setupTableView()
 
         // TODO: Reload table view when items change.
@@ -43,18 +41,10 @@ class ChatVC : UIViewController, UITableViewDataSource {
 
     override var canBecomeFirstResponder: Bool { return true; }
 
-    private var sendView: SendView!
+    var sendView: SendView!
 
     override var inputAccessoryView: UIView {
         get { return self.sendView }
-    }
- 
-    private func setupSendView() {
-        self.sendView =
-            Bundle.main.loadNibNamed(
-                Const.SendView,
-                owner: nil,
-                options: nil)?.first as! SendView
     }
 
     // MARK: - TABLE VIEW

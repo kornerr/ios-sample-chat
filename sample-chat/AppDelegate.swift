@@ -26,10 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var chatVC: ChatVC!
     private var chat: Chat!
+    private var sendView: SendView!
     
     private let disposeBag = DisposeBag()
 
     func setupApplication() {
+        // Load SendView.
+        self.sendView =
+            Bundle.main.loadNibNamed(
+                "SendView",
+                owner: nil,
+                options: nil)?.first as! SendView
+
         // ViewModel.
         self.chat = Chat()
 
@@ -38,10 +46,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nvc = UINavigationController(rootViewController: self.chatVC)
         self.window!.rootViewController = nvc
 
+        // Provide send view to chat VC.
+        self.chatVC.sendView = self.sendView
+
         // Sync view and viewmodel.
         self.chat.messages
             .asObservable()
             .bind(to: self.chatVC.messages)
+            .disposed(by: disposeBag)
+
+        // Listen to SendView lastMessage.
+        self.sendView.lastMessage
+            .asObservable()
+            .subscribe(onNext: { [unowned self] msg in
+                NSLog("AppDelegate. SendView last msg: '\(msg)'")
+                self.chat.addMessage(msg)
+            })
             .disposed(by: disposeBag)
     }
 
