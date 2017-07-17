@@ -7,7 +7,7 @@ class ChatsVC : UIViewController {
 
     // MARK: PUBLIC
 
-    let chats: Variable<[String]> = Variable([String]())
+    let chats: Variable<[String]> = Variable([])
 
     override func viewDidLoad() {
         super.viewDidLoad()

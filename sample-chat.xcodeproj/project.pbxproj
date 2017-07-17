@@ -14,6 +14,8 @@
 		2F199A231F1C9792005499D3 /* Chats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F199A221F1C9792005499D3 /* Chats.swift */; };
 		2F199A271F1C97A7005499D3 /* ChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F199A251F1C97A7005499D3 /* ChatsVC.swift */; };
 		2F199A281F1C97A7005499D3 /* ChatsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F199A261F1C97A7005499D3 /* ChatsVC.xib */; };
+		2F199A2D1F1C9D6F005499D3 /* ChatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F199A2B1F1C9D6F005499D3 /* ChatsCell.swift */; };
+		2F199A2E1F1C9D6F005499D3 /* ChatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F199A2C1F1C9D6F005499D3 /* ChatsCell.xib */; };
 		8689B7D5F00BA015BB16E72F /* Pods_sample_chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31108926BA88294E7E157F7 /* Pods_sample_chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,8 @@
 		2F199A221F1C9792005499D3 /* Chats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chats.swift; sourceTree = "<group>"; };
 		2F199A251F1C97A7005499D3 /* ChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsVC.swift; sourceTree = "<group>"; };
 		2F199A261F1C97A7005499D3 /* ChatsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsVC.xib; sourceTree = "<group>"; };
+		2F199A2B1F1C9D6F005499D3 /* ChatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsCell.swift; sourceTree = "<group>"; };
+		2F199A2C1F1C9D6F005499D3 /* ChatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsCell.xib; sourceTree = "<group>"; };
 		59C83D6CF2B8F0BC4A440F9D /* Pods-sample-chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample-chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-sample-chat/Pods-sample-chat.release.xcconfig"; sourceTree = "<group>"; };
 		B31108926BA88294E7E157F7 /* Pods_sample_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sample_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,6 +99,8 @@
 		2F199A241F1C9796005499D3 /* ChatsVC */ = {
 			isa = PBXGroup;
 			children = (
+				2F199A2B1F1C9D6F005499D3 /* ChatsCell.swift */,
+				2F199A2C1F1C9D6F005499D3 /* ChatsCell.xib */,
 				2F199A251F1C97A7005499D3 /* ChatsVC.swift */,
 				2F199A261F1C97A7005499D3 /* ChatsVC.xib */,
 			);
@@ -173,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F199A281F1C97A7005499D3 /* ChatsVC.xib in Resources */,
+				2F199A2E1F1C9D6F005499D3 /* ChatsCell.xib in Resources */,
 				2F199A1A1F1C89B4005499D3 /* LaunchScreen.storyboard in Resources */,
 				2F199A171F1C89B4005499D3 /* Assets.xcassets in Resources */,
 			);
@@ -234,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F199A271F1C97A7005499D3 /* ChatsVC.swift in Sources */,
+				2F199A2D1F1C9D6F005499D3 /* ChatsCell.swift in Sources */,
 				2F199A231F1C9792005499D3 /* Chats.swift in Sources */,
 				2F199A151F1C89B4005499D3 /* sample_chat.xcdatamodeld in Sources */,
 				2F199A0D1F1C89B4005499D3 /* AppDelegate.swift in Sources */,
