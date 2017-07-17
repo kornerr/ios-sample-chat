@@ -5,7 +5,7 @@ import UIKit
 
 class Chat {
 
-    // MARK PUBLIC
+    // MARK: - PUBLIC
 
     let messages: Variable<[String]> = Variable([])
     

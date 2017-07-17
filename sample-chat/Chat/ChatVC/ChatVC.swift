@@ -4,24 +4,14 @@ import RxSwift
 import UIKit
 
 class ChatVC : UIViewController, UITableViewDataSource {
+
+    // MARK: - PUBLIC
     
-    enum Const {
-        static let ChatCell = "ChatCell"
-    }
-
-    // MARK PUBLIC
-
     let messages: Variable<[String]> = Variable([])
 
-    override var canBecomeFirstResponder: Bool {
-        NSLog("canBecomeFirstResponder")
-        return true;
-    }
-    override var inputAccessoryView: UIView {
-        get {
-            NSLog("inputAccessoryView: '\(self.inputSendView)'")
-            return self.inputSendView
-        }
+    enum Const {
+        static let ChatCell = "ChatCell"
+        static let SendView = "SendView"
     }
 
     override func viewDidLoad() {
@@ -29,17 +19,14 @@ class ChatVC : UIViewController, UITableViewDataSource {
         self.setupChatVC()
     }
 
-    // MARK PRIVATE
-
-    @IBOutlet private var tableView: UITableView!
-    private var inputSendView: InputView!
+    // MARK: - PRIVATE
 
     private let disposeBag = DisposeBag()
     
     private func setupChatVC() {
         self.navigationItem.title = "Chat"
 
-        self.setupInputView()
+        self.setupSendView()
         self.setupTableView()
 
         // TODO: Reload table view when items change.
@@ -51,18 +38,29 @@ class ChatVC : UIViewController, UITableViewDataSource {
             })
             .disposed(by: disposeBag)
     }
- 
-    private func setupInputView() {
-        // Load InputView.
-        self.inputSendView =
-            Bundle.main.loadNibNamed(
-                "InputView",
-                owner: nil,
-                options: nil)?.first as! InputView
-        //self.inputSendView.frame.size = CGSize(width: self.inputSendView.frame.size.width, height: 60)
-        //self.view.addSubview(self.inputSendView)
 
+    // MARK: - SEND VIEW
+
+    override var canBecomeFirstResponder: Bool { return true; }
+
+    private var sendView: SendView!
+
+    override var inputAccessoryView: UIView {
+        get { return self.sendView }
     }
+ 
+    private func setupSendView() {
+        self.sendView =
+            Bundle.main.loadNibNamed(
+                Const.SendView,
+                owner: nil,
+                options: nil)?.first as! SendView
+    }
+
+    // MARK: - TABLE VIEW
+
+    @IBOutlet private var tableView: UITableView!
+
     private func setupTableView() {
         let cellNib = UINib(nibName: Const.ChatCell, bundle: nil)
         self.tableView.register(
@@ -74,8 +72,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
     }
-
-    // MARK DELEGATE
 
     func tableView(
         _ tableView: UITableView,
