@@ -10,7 +10,7 @@ class Chats {
     let chats: Variable<[String]> = Variable([String]())
     
     init() {
-        self.chats = ["abc", "def", "ghi"]
+        self.chats.value = ["abc", "def", "ghi"]
     }
 }
 
