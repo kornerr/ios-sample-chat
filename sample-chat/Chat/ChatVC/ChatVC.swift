@@ -3,15 +3,15 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class ChatsVC : UIViewController, UITableViewDataSource {
+class ChatVC : UIViewController, UITableViewDataSource {
     
     enum Const {
-        static let ChatsCell = "ChatsCell"
+        static let ChatCell = "ChatCell"
     }
 
     // MARK PUBLIC
 
-    let chats: Variable<[String]> = Variable([])
+    let messages: Variable<[String]> = Variable([])
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,34 +25,34 @@ class ChatsVC : UIViewController, UITableViewDataSource {
     private let disposeBag = DisposeBag()
     
     private func setup() {
-        self.navigationItem.title = "Chats"
+        self.navigationItem.title = "Chat"
 
-        self.setupChats()
+        self.setupChatVC()
     }
 
-    private func setupChats() {
+    private func setupChatVC() {
         self.setupTableView()
 
         // TODO: Reload table view when items change.
-        self.chats
+        self.messages
             .asObservable()
-            .subscribe(onNext : { [unowned self] chats in
-                NSLog("ChatsVC. Items now: '\(chats)'")
+            .subscribe(onNext : { [unowned self] messages in
+                NSLog("ChatVC. Messages now: '\(messages)'")
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
 
     private func setupTableView() {
-        let cellNib = UINib(nibName: Const.ChatsCell, bundle: nil)
+        let cellNib = UINib(nibName: Const.ChatCell, bundle: nil)
         self.tableView.register(
             cellNib,
-            forCellReuseIdentifier: Const.ChatsCell)
+            forCellReuseIdentifier: Const.ChatCell)
         self.tableView.dataSource = self
 
         // Make sure cells are self-sizing.
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 100
+        self.tableView.estimatedRowHeight = 60
     }
 
     // MARK DELEGATE
@@ -60,21 +60,19 @@ class ChatsVC : UIViewController, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        return self.chats.value.count
+        return self.messages.value.count
     }
 
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        NSLog("ChatsVC. cellForRow: '\(indexPath.row)'")
-
         let cell =
             tableView.dequeueReusableCell(
-                withIdentifier: Const.ChatsCell,
+                withIdentifier: Const.ChatCell,
                 for: indexPath)
-            as! ChatsCell
-        cell.title = self.chats.value[indexPath.row]
+            as! ChatCell
+        cell.title = self.messages.value[indexPath.row]
         NSLog("Cell id: '\(indexPath.row)' title: '\(cell.title)'")
         return cell
     }

@@ -1,11 +1,10 @@
 
 import UIKit
 
-class ChatsCell: UITableViewCell {
+class ChatCell: UITableViewCell {
 
-    // MARK PUBLIC
+    // MARK TITLE
     
-    private var _title: String = ""
     var title: String {
         get { return _title }
         set {
@@ -13,6 +12,11 @@ class ChatsCell: UITableViewCell {
             self.updateTitle()
         }
     }
+    private var _title: String = ""
+    private func updateTitle() {
+        self.titleLabel?.text = self.title
+    }
+    @IBOutlet private var titleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,14 +32,6 @@ class ChatsCell: UITableViewCell {
 
     private func setupChatsCell() {
         self.updateTitle()
-    }
-
-    // MARK TITLE
-
-    @IBOutlet private var titleLabel: UILabel!
-
-    private func updateTitle() {
-        self.titleLabel?.text = self.title
     }
 
 }

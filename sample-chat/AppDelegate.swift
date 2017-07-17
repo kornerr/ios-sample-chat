@@ -24,24 +24,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK PRIVATE
 
-    private var chatsVC: ChatsVC!
-    private var chats: Chats!
+    private var chatVC: ChatVC!
+    private var chat: Chat!
     
     private let disposeBag = DisposeBag()
 
     func setupApplication() {
         // ViewModel.
-        self.chats = Chats()
+        self.chat = Chat()
 
         // View.
-        self.chatsVC = ChatsVC()
-        let nvc = UINavigationController(rootViewController: self.chatsVC)
+        self.chatVC = ChatVC()
+        let nvc = UINavigationController(rootViewController: self.chatVC)
         self.window!.rootViewController = nvc
 
-        // Sync chats.
-        self.chats.chats
+        // Sync view and viewmodel.
+        self.chat.messages
             .asObservable()
-            .bind(to: self.chatsVC.chats)
+            .bind(to: self.chatVC.messages)
             .disposed(by: disposeBag)
     }
 
