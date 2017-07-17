@@ -31,21 +31,31 @@ class ChatsVC : UIViewController, UITableViewDataSource {
     }
 
     private func setupChats() {
+        self.setupTableView()
+
+        // TODO: Reload table view when items change.
+        self.chats
+            .asObservable()
+            .subscribe(onNext : { [unowned self] chats in
+                NSLog("ChatsVC. Items now: '\(chats)'")
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func setupTableView() {
         let cellNib = UINib(nibName: Const.ChatsCell, bundle: nil)
         self.tableView.register(
             cellNib,
             forCellReuseIdentifier: Const.ChatsCell)
         self.tableView.dataSource = self
 
-        // TODO: Reload table view when items change.
-        self.chats
-            .asObservable()
-            .subscribe(onNext : { chats in
-                NSLog("Chats changed to '\(chats)'")
-                //self.tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
+        // Make sure cells are self-sizing.
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
     }
+
+    // MARK DELEGATE
 
     func tableView(
         _ tableView: UITableView,
