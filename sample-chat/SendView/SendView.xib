@@ -40,6 +40,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="sendButton" destination="2Ac-kj-82h" id="PRJ-yf-OCi"/>
+                <outlet property="textField" destination="g5U-e3-cSZ" id="Wb7-JV-Zsh"/>
             </connections>
         </view>
     </objects>
