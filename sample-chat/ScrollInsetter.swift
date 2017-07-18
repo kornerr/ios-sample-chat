@@ -4,11 +4,7 @@ import UIKit
 // Manage scroll view insets for when keyboard is shown or hidden.
 class ScrollInsetter : NSObject {
 
-    enum Const {
-        static let AnimDuration = 0.2
-    }
-
-    private var scrollView: UIScrollView!
+    // MARK: - PUBLIC
 
     init(scrollView: UIScrollView) {
         super.init()
@@ -19,6 +15,14 @@ class ScrollInsetter : NSObject {
     deinit {
         self.tearDownScrolling()
     }
+
+    // MARK: - PRIVATE
+
+    private enum Const {
+        static let AnimDuration = 0.2
+    }
+
+    private var scrollView: UIScrollView!
 
     private func setupScrolling() {
         NotificationCenter.default.addObserver(
@@ -36,8 +40,9 @@ class ScrollInsetter : NSObject {
     private func tearDownScrolling() {
         NotificationCenter.default.removeObserver(self)
     }
+
+    // MARK: - SELECTORS
     
-    //TODO: can make private?
     func keyboardWillShow(notification: Notification) {
         let keyboardFrame =
             notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
@@ -49,7 +54,6 @@ class ScrollInsetter : NSObject {
         }
     }
 
-    //TODO: can make private?
     func keyboardWillHide(notification: Notification) {
         UIView.animate(
             withDuration: Const.AnimDuration,
