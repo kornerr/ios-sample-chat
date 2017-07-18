@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Listen to SendView lastMessage.
         self.sendView.lastMessage
             .asObservable()
+            .filter { $0.characters.count > 0 }
             .subscribe(onNext: { [unowned self] msg in
                 NSLog("AppDelegate. SendView last msg: '\(msg)'")
                 self.chat.addMessage(msg)
