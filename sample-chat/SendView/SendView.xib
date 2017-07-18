@@ -6,35 +6,76 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SendView" customModule="sample_chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5U-e3-cSZ">
-                    <rect key="frame" x="8" y="15" width="308" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ac-kj-82h">
-                    <rect key="frame" x="331" y="15" width="36" height="30"/>
-                    <state key="normal" title="Send"/>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izv-hF-GDk">
+                    <rect key="frame" x="8" y="15" width="359" height="37"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5U-e3-cSZ">
+                            <rect key="frame" x="0.0" y="0.0" width="285" height="37"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ac-kj-82h">
+                            <rect key="frame" x="293" y="0.0" width="66" height="37"/>
+                            <state key="normal" title="Send text"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="g5U-e3-cSZ" firstAttribute="leading" secondItem="izv-hF-GDk" secondAttribute="leading" id="6Pn-rJ-6Iw"/>
+                        <constraint firstItem="2Ac-kj-82h" firstAttribute="leading" secondItem="g5U-e3-cSZ" secondAttribute="trailing" constant="8" id="Jrm-5U-kl2"/>
+                        <constraint firstAttribute="bottom" secondItem="2Ac-kj-82h" secondAttribute="bottom" id="Kx1-by-FX0"/>
+                        <constraint firstItem="g5U-e3-cSZ" firstAttribute="top" secondItem="izv-hF-GDk" secondAttribute="top" id="ftG-Sg-UJ5"/>
+                        <constraint firstItem="2Ac-kj-82h" firstAttribute="top" secondItem="izv-hF-GDk" secondAttribute="top" id="gte-bx-hif"/>
+                        <constraint firstAttribute="trailing" secondItem="2Ac-kj-82h" secondAttribute="trailing" id="i5H-hE-9oe"/>
+                        <constraint firstAttribute="bottom" secondItem="g5U-e3-cSZ" secondAttribute="bottom" id="pyL-2p-zyC"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYV-h1-to4">
+                    <rect key="frame" x="8" y="60" width="359" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbp-Pe-bji">
+                            <rect key="frame" x="0.0" y="0.0" width="175.5" height="44"/>
+                            <state key="normal" title="Send image"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nn4-ZN-bcR">
+                            <rect key="frame" x="183.5" y="0.0" width="175.5" height="44"/>
+                            <state key="normal" title="Send geolocation"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Nn4-ZN-bcR" firstAttribute="leading" secondItem="hbp-Pe-bji" secondAttribute="trailing" constant="8" id="6pR-GM-zHj"/>
+                        <constraint firstItem="hbp-Pe-bji" firstAttribute="width" secondItem="gYV-h1-to4" secondAttribute="width" multiplier="0.5" constant="-4" id="E1Y-oC-pKU"/>
+                        <constraint firstItem="hbp-Pe-bji" firstAttribute="top" secondItem="gYV-h1-to4" secondAttribute="top" id="HSg-Ez-8cn"/>
+                        <constraint firstAttribute="trailing" secondItem="Nn4-ZN-bcR" secondAttribute="trailing" id="Sed-f3-D3g"/>
+                        <constraint firstAttribute="bottom" secondItem="hbp-Pe-bji" secondAttribute="bottom" id="XaF-uy-88b"/>
+                        <constraint firstItem="Nn4-ZN-bcR" firstAttribute="top" secondItem="gYV-h1-to4" secondAttribute="top" id="eTe-gU-cfY"/>
+                        <constraint firstAttribute="height" constant="44" id="iKN-eM-kSO"/>
+                        <constraint firstAttribute="bottom" secondItem="Nn4-ZN-bcR" secondAttribute="bottom" id="uZM-Jp-fm9"/>
+                        <constraint firstItem="hbp-Pe-bji" firstAttribute="leading" secondItem="gYV-h1-to4" secondAttribute="leading" id="w1V-Co-6YA"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="g5U-e3-cSZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="5Qd-6t-agF"/>
-                <constraint firstItem="2Ac-kj-82h" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Ykb-5k-ZyE"/>
-                <constraint firstAttribute="bottom" secondItem="g5U-e3-cSZ" secondAttribute="bottom" constant="15" id="cze-u7-sVN"/>
-                <constraint firstItem="2Ac-kj-82h" firstAttribute="leading" secondItem="g5U-e3-cSZ" secondAttribute="trailing" constant="15" id="eEi-iK-XlI"/>
-                <constraint firstAttribute="bottom" secondItem="2Ac-kj-82h" secondAttribute="bottom" constant="15" id="shR-qi-GMv"/>
-                <constraint firstAttribute="trailing" secondItem="2Ac-kj-82h" secondAttribute="trailing" constant="8" id="wMJ-5D-fYr"/>
-                <constraint firstItem="g5U-e3-cSZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="xZh-jD-2qR"/>
+                <constraint firstItem="izv-hF-GDk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Ag9-CA-L2z"/>
+                <constraint firstAttribute="trailing" secondItem="gYV-h1-to4" secondAttribute="trailing" constant="8" id="Vaj-1C-0ug"/>
+                <constraint firstItem="gYV-h1-to4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="edX-9w-L3i"/>
+                <constraint firstItem="gYV-h1-to4" firstAttribute="top" secondItem="izv-hF-GDk" secondAttribute="bottom" constant="8" id="i59-mH-cja"/>
+                <constraint firstAttribute="bottom" secondItem="gYV-h1-to4" secondAttribute="bottom" constant="8" id="nxJ-NM-SFt"/>
+                <constraint firstAttribute="trailing" secondItem="izv-hF-GDk" secondAttribute="trailing" constant="8" id="ujv-fI-CZX"/>
+                <constraint firstItem="izv-hF-GDk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="vRR-v7-Ciq"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -42,6 +83,7 @@
                 <outlet property="sendButton" destination="2Ac-kj-82h" id="PRJ-yf-OCi"/>
                 <outlet property="textField" destination="g5U-e3-cSZ" id="Wb7-JV-Zsh"/>
             </connections>
+            <point key="canvasLocation" x="24.5" y="170"/>
         </view>
     </objects>
 </document>

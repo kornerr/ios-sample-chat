@@ -43,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // View.
         self.chatVC = ChatVC()
-        let nvc = UINavigationController(rootViewController: self.chatVC)
-        self.window!.rootViewController = nvc
+        self.window!.rootViewController = self.chatVC
 
         // Provide send view to chat VC.
         self.chatVC.sendView = self.sendView

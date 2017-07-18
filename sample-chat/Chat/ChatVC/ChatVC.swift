@@ -103,12 +103,14 @@ class ChatVC : UIViewController, UITableViewDataSource {
         if let kbHeight = keyboardFrame?.cgRectValue.height {
             self.tableView.contentInset =
                 UIEdgeInsetsMake(0, 0, kbHeight, 0)
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         }
     }
     func keyboardWillHide(notification: Notification) {
         UIView.animate(withDuration: Const.AnimDuration, animations: { [unowned self] _ in
             self.tableView.contentInset =
                 UIEdgeInsetsMake(0, 0, 0, 0)
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         })
         
     }
