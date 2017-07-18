@@ -22,7 +22,7 @@ class ScrollInsetter : NSObject {
         static let AnimDuration = 0.2
     }
 
-    private var scrollView: UIScrollView!
+    private weak var scrollView: UIScrollView?
 
     private func setupScrolling() {
         NotificationCenter.default.addObserver(
@@ -46,22 +46,21 @@ class ScrollInsetter : NSObject {
     func keyboardWillShow(notification: Notification) {
         let keyboardFrame =
             notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
-        if let kbHeight = keyboardFrame?.cgRectValue.height {
-            self.scrollView.contentInset =
-                UIEdgeInsetsMake(0, 0, kbHeight, 0)
-            self.scrollView.scrollIndicatorInsets =
-                self.scrollView.contentInset
+        if let kbHeight = keyboardFrame?.cgRectValue.height, let scrollView = self.scrollView {
+            
+            scrollView.contentInset = UIEdgeInsetsMake(0, 0, kbHeight, 0)
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
         }
     }
 
     func keyboardWillHide(notification: Notification) {
         UIView.animate(
             withDuration: Const.AnimDuration,
-            animations: { [unowned self] _ in
-                self.scrollView.contentInset =
-                    UIEdgeInsetsMake(0, 0, 0, 0)
-                self.scrollView.scrollIndicatorInsets =
-                    self.scrollView.contentInset
+            animations: { [unowned self] in
+                if let scrollView = self.scrollView {
+                    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+                    scrollView.scrollIndicatorInsets = scrollView.contentInset
+                }
         })
     }
 

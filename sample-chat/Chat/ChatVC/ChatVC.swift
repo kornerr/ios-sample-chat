@@ -11,7 +11,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
 
     enum Const {
         static let ChatCell = "ChatCell"
-        static let AnimDuration = 0.2
     }
 
     override func viewDidLoad() {
@@ -25,7 +24,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
     
     private func setupChatVC() {
         self.setupTableView()
-        self.setupTableViewScrolling()
 
         // Refresh table view when items change.
         self.messages
@@ -51,6 +49,7 @@ class ChatVC : UIViewController, UITableViewDataSource {
     // MARK: - TABLE VIEW
 
     @IBOutlet private var tableView: UITableView!
+    private var scrollInsetter: ScrollInsetter!
 
     private func scrollToBottom() {
         if (self.messages.value.count > 0) {
@@ -75,44 +74,11 @@ class ChatVC : UIViewController, UITableViewDataSource {
         // Make sure cells are self-sizing.
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
-    }
-    
-    // MARK: - TABLE VIEW SCROLLING
-    
-    private func setupTableViewScrolling() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(ChatVC.keyboardWillShow(notification:)),
-            name: .UIKeyboardWillShow,
-            object: nil)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(ChatVC.keyboardWillHide(notification:)),
-            name: .UIKeyboardWillHide,
-            object: nil)
-    }
-    private func tearDownTableViewScrolling() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func keyboardWillShow(notification: Notification) {
-        let keyboardFrame =
-            notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
-        if let kbHeight = keyboardFrame?.cgRectValue.height {
-            self.tableView.contentInset =
-                UIEdgeInsetsMake(0, 0, kbHeight, 0)
-            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-        }
-    }
-    func keyboardWillHide(notification: Notification) {
-        UIView.animate(withDuration: Const.AnimDuration, animations: { [unowned self] _ in
-            self.tableView.contentInset =
-                UIEdgeInsetsMake(0, 0, 0, 0)
-            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-        })
-        
-    }
 
+        // Setup scrolling
+        self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
+    }
+    
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
