@@ -24,8 +24,6 @@ class ChatVC : UIViewController, UITableViewDataSource {
     private let disposeBag = DisposeBag()
     
     private func setupChatVC() {
-        self.navigationItem.title = "Chat"
-
         self.setupTableView()
         self.setupTableViewScrolling()
 
