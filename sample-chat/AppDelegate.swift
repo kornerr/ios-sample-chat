@@ -52,17 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.chat.messages
             .asObservable()
             .bind(to: self.chatVC.messages)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
 
-        // Listen to SendView lastMessage.
+        // Add SendView message as 'Human' author.
         self.sendView.lastMessage
             .asObservable()
             .filter { $0.characters.count > 0 }
-            .subscribe(onNext: { [unowned self] msg in
+            .subscribe(onNext: { [unowned self] text in
+                var msg = ChatMessage()
+                msg.author = "Human"
+                msg.text = text
                 NSLog("AppDelegate. SendView last msg: '\(msg)'")
                 self.chat.addMessage(msg)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: - Core Data stack

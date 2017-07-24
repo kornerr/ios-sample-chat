@@ -1,4 +1,6 @@
 
+import Foundation
+
 struct ChatMessage : CustomStringConvertible {
     var date = Date()
     var author = ""
@@ -8,8 +10,8 @@ struct ChatMessage : CustomStringConvertible {
 
     var description: String {
         return
-            "ChatMessage(date: '\(date)' "
-            "author: '\(author)' "
+            "ChatMessage(date: '\(date)' " +
+            "author: '\(author)' " +
             "text: '\(text)')"
     }
 }

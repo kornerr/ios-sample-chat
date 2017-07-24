@@ -7,7 +7,7 @@ class ChatVC : UIViewController, UITableViewDataSource {
 
     // MARK: - PUBLIC
     
-    let messages: Variable<[String]> = Variable([])
+    let messages: Variable<[ChatMessage]> = Variable([])
 
     enum Const {
         static let ChatCell = "ChatCell"
@@ -33,7 +33,7 @@ class ChatVC : UIViewController, UITableViewDataSource {
                 self.tableView.reloadData()
                 self.scrollToBottom()
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: - SEND VIEW
@@ -94,7 +94,10 @@ class ChatVC : UIViewController, UITableViewDataSource {
                 withIdentifier: Const.ChatCell,
                 for: indexPath)
             as! ChatCell
-        cell.title = self.messages.value[indexPath.row]
+        let message = self.messages.value[indexPath.row]
+        cell.title = message.text
+        // TODO: author
+        // TODO: date
         NSLog("Cell id: '\(indexPath.row)' title: '\(cell.title)'")
         return cell
     }
