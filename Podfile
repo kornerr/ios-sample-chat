@@ -4,6 +4,7 @@ target 'sample-chat' do
   use_frameworks!
 
   pod 'RxCocoa', '~> 3'
+  pod 'SnapKit', '~> 3'
 
 end
 
