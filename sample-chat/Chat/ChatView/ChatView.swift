@@ -105,6 +105,7 @@ class ChatView: UIView, UITableViewDataSource {
                 for: indexPath)
             as! ChatItemCell
         let item = self.messages.value[indexPath.row]
+        cell.author = item.author
         cell.date = item.date
         cell.contents = item.text
         return cell

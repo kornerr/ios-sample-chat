@@ -10,6 +10,24 @@ class ChatItemCell: UITableViewCell {
         self.setupNotificationsItemCell()
     }
 
+    // MARK: - PROPERTY AUTHOR
+    
+    var author: String {
+        get { return _author }
+        set {
+            _author = newValue
+            self.updateAuthor()
+        }
+    }
+
+    private var _author = ""
+
+    @IBOutlet private var authorLabel: UILabel!
+
+    private func updateAuthor() {
+        self.authorLabel?.text = self.author
+    }
+
     // MARK: - PROPERTY DATE
     
     var date: Date {

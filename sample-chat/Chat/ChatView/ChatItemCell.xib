@@ -24,6 +24,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zR-KM-Dp1">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="77.5"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34M-og-rxQ">
+                                        <rect key="frame" x="5" y="5" width="26.5" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wp2-GY-IMd">
                                         <rect key="frame" x="268.5" y="5" width="26.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -43,8 +49,11 @@
                                     <constraint firstItem="oqb-cR-si9" firstAttribute="leading" secondItem="3zR-KM-Dp1" secondAttribute="leading" constant="5" id="8iJ-Qg-f0f"/>
                                     <constraint firstItem="oqb-cR-si9" firstAttribute="top" secondItem="wp2-GY-IMd" secondAttribute="bottom" constant="5" id="DFJ-ix-RoR"/>
                                     <constraint firstAttribute="trailing" secondItem="wp2-GY-IMd" secondAttribute="trailing" constant="5" id="Ff3-je-0BQ"/>
+                                    <constraint firstItem="34M-og-rxQ" firstAttribute="leading" secondItem="3zR-KM-Dp1" secondAttribute="leading" constant="5" id="KYp-Qe-4bs"/>
                                     <constraint firstItem="wp2-GY-IMd" firstAttribute="top" secondItem="3zR-KM-Dp1" secondAttribute="top" constant="5" id="R12-X7-9Xx"/>
+                                    <constraint firstItem="oqb-cR-si9" firstAttribute="top" secondItem="34M-og-rxQ" secondAttribute="bottom" constant="5" id="VTJ-MD-zhL"/>
                                     <constraint firstAttribute="trailing" secondItem="oqb-cR-si9" secondAttribute="trailing" constant="5" id="cMF-2v-LuX"/>
+                                    <constraint firstItem="34M-og-rxQ" firstAttribute="top" secondItem="3zR-KM-Dp1" secondAttribute="top" constant="5" id="jz8-p4-nEg"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -67,6 +76,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="authorLabel" destination="34M-og-rxQ" id="Ddt-w2-TL3"/>
                 <outlet property="contentsLabel" destination="oqb-cR-si9" id="tuf-Bc-ghc"/>
                 <outlet property="dateLabel" destination="wp2-GY-IMd" id="2Hm-Dv-fig"/>
                 <outlet property="roundedView" destination="3zR-KM-Dp1" id="va3-HA-FzI"/>
