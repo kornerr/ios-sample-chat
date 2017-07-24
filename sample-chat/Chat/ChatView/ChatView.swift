@@ -22,21 +22,6 @@ class ChatView: UIView, UITableViewDataSource {
 
     private let disposeBag = DisposeBag()
 
-    @IBOutlet private var tableView: UITableView!
-    
-    private func scrollToBottom() {
-        if (self.messages.value.count > 0) {
-            let lastRow =
-                IndexPath(
-                    row: self.messages.value.count - 1,
-                    section: 0)
-            self.tableView.scrollToRow(
-                at: lastRow,
-                at: .bottom,
-                animated: true)
-        }
-    }
-
     private func setupChatView() {
         self.setupTableView()
 
@@ -60,6 +45,27 @@ class ChatView: UIView, UITableViewDataSource {
             .disposed(by: self.disposeBag)
     }
 
+    // MARK: - INSETS
+
+    private var scrollInsetter: ScrollInsetter!
+
+    // MARK: - TABLE VIEW
+
+    @IBOutlet private var tableView: UITableView!
+    
+    private func scrollToBottom() {
+        if (self.messages.value.count > 0) {
+            let lastRow =
+                IndexPath(
+                    row: self.messages.value.count - 1,
+                    section: 0)
+            self.tableView.scrollToRow(
+                at: lastRow,
+                at: .bottom,
+                animated: true)
+        }
+    }
+
     private func setupTableView() {
         // Register cells.
         let cellNib = UINib(nibName: Const.ChatItemCell, bundle: nil)
@@ -73,6 +79,9 @@ class ChatView: UIView, UITableViewDataSource {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight =
             Const.ChatItemCellEstimatedHeight
+
+        // Setup scrolling
+        self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
     }
 
     // MARK: - TABLE VIEW DELEGATE

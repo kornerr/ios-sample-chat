@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatVC" customModule="sample_chat" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="jEb-wU-9Xf" id="3eC-sF-lXb"/>
+                <outlet property="chatContainerView" destination="Bzm-X1-rEi" id="uvb-2e-M4c"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,17 +20,26 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jEb-wU-9Xf">
-                    <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHj-iy-mFH">
+                    <rect key="frame" x="20" y="20" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzm-X1-rEi">
+                    <rect key="frame" x="0.0" y="51" width="320" height="429"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="jEb-wU-9Xf" secondAttribute="bottom" id="W5t-XY-6ms"/>
-                <constraint firstItem="jEb-wU-9Xf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="id0-O1-8Eg"/>
-                <constraint firstAttribute="trailing" secondItem="jEb-wU-9Xf" secondAttribute="trailing" id="nVL-BY-kna"/>
-                <constraint firstItem="jEb-wU-9Xf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uia-g0-oql"/>
+                <constraint firstItem="Bzm-X1-rEi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Yx-o1-OrV"/>
+                <constraint firstAttribute="bottom" secondItem="Bzm-X1-rEi" secondAttribute="bottom" id="A7O-Yh-9kM"/>
+                <constraint firstItem="HHj-iy-mFH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="LTq-ou-1by"/>
+                <constraint firstItem="Bzm-X1-rEi" firstAttribute="top" secondItem="HHj-iy-mFH" secondAttribute="bottom" constant="10" id="Nd0-ob-gAd"/>
+                <constraint firstItem="HHj-iy-mFH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="V8b-DL-jCU"/>
+                <constraint firstAttribute="trailing" secondItem="Bzm-X1-rEi" secondAttribute="trailing" id="n0B-bQ-7om"/>
+                <constraint firstAttribute="trailing" secondItem="HHj-iy-mFH" secondAttribute="trailing" constant="20" id="v6t-9a-OjI"/>
             </constraints>
         </view>
     </objects>

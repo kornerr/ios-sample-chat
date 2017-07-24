@@ -25,14 +25,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="77.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wp2-GY-IMd">
-                                        <rect key="frame" x="257.5" y="5" width="37.5" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="268.5" y="5" width="26.5" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqb-cR-si9">
-                                        <rect key="frame" x="5" y="5" width="290" height="68"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <rect key="frame" x="5" y="22" width="290" height="51"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -41,9 +41,9 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="oqb-cR-si9" secondAttribute="bottom" constant="5" id="6VH-9h-ZwI"/>
                                     <constraint firstItem="oqb-cR-si9" firstAttribute="leading" secondItem="3zR-KM-Dp1" secondAttribute="leading" constant="5" id="8iJ-Qg-f0f"/>
+                                    <constraint firstItem="oqb-cR-si9" firstAttribute="top" secondItem="wp2-GY-IMd" secondAttribute="bottom" constant="5" id="DFJ-ix-RoR"/>
                                     <constraint firstAttribute="trailing" secondItem="wp2-GY-IMd" secondAttribute="trailing" constant="5" id="Ff3-je-0BQ"/>
                                     <constraint firstItem="wp2-GY-IMd" firstAttribute="top" secondItem="3zR-KM-Dp1" secondAttribute="top" constant="5" id="R12-X7-9Xx"/>
-                                    <constraint firstItem="oqb-cR-si9" firstAttribute="top" secondItem="3zR-KM-Dp1" secondAttribute="top" constant="5" id="a83-xt-ZzR"/>
                                     <constraint firstAttribute="trailing" secondItem="oqb-cR-si9" secondAttribute="trailing" constant="5" id="cMF-2v-LuX"/>
                                 </constraints>
                             </view>
@@ -67,6 +67,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="contentsLabel" destination="oqb-cR-si9" id="tuf-Bc-ghc"/>
                 <outlet property="dateLabel" destination="wp2-GY-IMd" id="2Hm-Dv-fig"/>
                 <outlet property="roundedView" destination="3zR-KM-Dp1" id="va3-HA-FzI"/>
                 <outlet property="shadowedView" destination="dHJ-Ae-UCE" id="9YS-nT-pnz"/>

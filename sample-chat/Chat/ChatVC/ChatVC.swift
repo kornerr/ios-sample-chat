@@ -3,14 +3,14 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class ChatVC : UIViewController, UITableViewDataSource {
+class ChatVC : UIViewController {
 
     // MARK: - PUBLIC
     
     let messages: Variable<[ChatMessage]> = Variable([])
 
     enum Const {
-        static let ChatCell = "ChatCell"
+        static let ChatView = "ChatView"
     }
 
     override func viewDidLoad() {
@@ -23,19 +23,25 @@ class ChatVC : UIViewController, UITableViewDataSource {
     private let disposeBag = DisposeBag()
     
     private func setupChatVC() {
-        self.setupTableView()
-
-        // Refresh table view when items change.
-        self.messages
-            .asObservable()
-            .subscribe(onNext : { [unowned self] messages in
-                NSLog("ChatVC. Messages now: '\(messages)'")
-                self.tableView.reloadData()
-                self.scrollToBottom()
-            })
-            .disposed(by: self.disposeBag)
+        self.setupChatView()
     }
 
+    // MARK: - CHAT VIEW
+
+    private var chatView: ChatView!
+    @IBOutlet private var chatContainerView: UIView!
+
+    private func setupChatView() {
+        self.chatView = ChatView.loadFromNib()
+        self.chatContainerView.embeddedView = self.chatView
+
+        // Sync items.
+        self.messages
+            .asObservable()
+            .bind(to: self.chatView.messages)
+            .disposed(by: self.disposeBag)
+    }
+    
     // MARK: - SEND VIEW
 
     override var canBecomeFirstResponder: Bool { return true; }
@@ -46,61 +52,5 @@ class ChatVC : UIViewController, UITableViewDataSource {
         get { return self.sendView }
     }
 
-    // MARK: - TABLE VIEW
-
-    @IBOutlet private var tableView: UITableView!
-    private var scrollInsetter: ScrollInsetter!
-
-    private func scrollToBottom() {
-        if (self.messages.value.count > 0) {
-            let lastRow =
-                IndexPath(
-                    row: self.messages.value.count - 1,
-                    section: 0)
-            self.tableView.scrollToRow(
-                at: lastRow,
-                at: .bottom,
-                animated: true)
-        }
-    }
-
-    private func setupTableView() {
-        let cellNib = UINib(nibName: Const.ChatCell, bundle: nil)
-        self.tableView.register(
-            cellNib,
-            forCellReuseIdentifier: Const.ChatCell)
-        self.tableView.dataSource = self
-
-        // Make sure cells are self-sizing.
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 60
-
-        // Setup scrolling
-        self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int) -> Int {
-        return self.messages.value.count
-    }
-
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell =
-            tableView.dequeueReusableCell(
-                withIdentifier: Const.ChatCell,
-                for: indexPath)
-            as! ChatCell
-        let message = self.messages.value[indexPath.row]
-        cell.title = message.text
-        // TODO: author
-        // TODO: date
-        NSLog("Cell id: '\(indexPath.row)' title: '\(cell.title)'")
-        return cell
-    }
-    
 }
 
