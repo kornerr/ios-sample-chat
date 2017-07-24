@@ -66,6 +66,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.chat.addMessage(msg)
             })
             .disposed(by: self.disposeBag)
+
+        // Duplicate 'Human' messages by 'Bot'.
+        self.chat.messages
+            .asObservable()
+            .filter { $0.count > 0 }
+            .map { $0.last }
+            .delay(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] msg in
+                var botMsg = ChatMessage()
+                botMsg.text = "You just typed: '\(msg!.text)'"
+                botMsg.author = "Bot"
+                self.chat.addMessage(botMsg)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: - Core Data stack
