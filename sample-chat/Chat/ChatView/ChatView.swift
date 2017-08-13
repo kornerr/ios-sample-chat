@@ -2,7 +2,7 @@
 import RxSwift
 import UIKit
 
-class ChatView: UIView, UITableViewDataSource {
+class ChatView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - PUBLIC
 
@@ -10,7 +10,7 @@ class ChatView: UIView, UITableViewDataSource {
 
     enum Const {
         static let ChatItemCell = "ChatItemCell"
-        static let ChatItemCellEstimatedHeight : CGFloat = 60
+        static let ChatItemCellEstimatedHeight : CGFloat = 100
     }
 
     override func awakeFromNib() {
@@ -25,33 +25,28 @@ class ChatView: UIView, UITableViewDataSource {
     private func setupChatView() {
         self.setupTableView()
 
-        // Refresh table view when items change.
+        // Insert new items into table view.
         self.messages
             .asObservable()
+            .filter { return !$0.isEmpty }
             .subscribe(onNext: { [unowned self] _ in
-                self.tableView.reloadData()
-                /*
                 let lastRow =
                     IndexPath(
-                        row: self.notifications.value.count - 1,
+                        row: self.messages.value.count - 1,
                         section: 0)
-                NSLog("latRow: '\(lastRow.row)'")
                 self.tableView.beginUpdates()
                 self.tableView.insertRows(at: [lastRow], with: .none)
                 self.tableView.endUpdates()
-                */
+
                 self.scrollToBottom()
             })
             .disposed(by: self.disposeBag)
     }
 
-    // MARK: - INSETS
-
-    private var scrollInsetter: ScrollInsetter!
-
     // MARK: - TABLE VIEW
 
     @IBOutlet private var tableView: UITableView!
+    private var scrollInsetter: ScrollInsetter!
     
     private func scrollToBottom() {
         if (self.messages.value.count > 0) {
@@ -74,16 +69,47 @@ class ChatView: UIView, UITableViewDataSource {
             forCellReuseIdentifier: Const.ChatItemCell)
 
         self.tableView.dataSource = self
-        
-        // Make sure cells are self-sizing.
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight =
-            Const.ChatItemCellEstimatedHeight
+        self.tableView.delegate = self
 
+        self.setupTableViewCellHeight()
+        
         // Setup scrolling
         self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
     }
 
+    // MARK: - TABLE VIEW CELL HEIGHT
+    // Cell height caching: https://stackoverflow.com/a/33397350/3404710
+    
+    private var cachedCellHeights = [IndexPath : CGFloat]()
+
+    func setupTableViewCellHeight() {
+        // Make cells self-sizing.
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        // Retrieve cell height if it has been visible at least once.
+        if let height = self.cachedCellHeights[indexPath] {
+            return height
+        }
+        // The first display uses automatic calculation.
+        else {
+            return UITableViewAutomaticDimension
+        }
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath) {
+
+        // Cache cell height.
+        self.cachedCellHeights[indexPath] = cell.frame.size.height
+    }
+        
     // MARK: - TABLE VIEW DELEGATE
 
     func tableView(
