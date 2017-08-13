@@ -36,6 +36,7 @@ class ScrollInsetter : NSObject {
     private weak var scrollView: UIScrollView?
 
     private func setupScrolling() {
+        /*
         // Control insets.
         NotificationCenter.default.addObserver(
             self,
@@ -58,6 +59,7 @@ class ScrollInsetter : NSObject {
             selector: #selector(ScrollInsetter.keyboardDidHide(notification:)),
             name: .UIKeyboardDidHide,
             object: nil)
+            */
     }
 
     private func tearDownScrolling() {

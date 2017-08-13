@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.setupKeyboard()
         self.setupApplication()
         self.window!.backgroundColor = UIColor.white
         self.window!.makeKeyAndVisible()
@@ -79,6 +80,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 botMsg.text = "You just typed: '\(msg!.text)'"
                 botMsg.author = "Bot"
                 self.chat.addMessage(botMsg)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    // MARK: - KEYBOARD
+    
+    private var keyboard: Keyboard!
+
+    private func setupKeyboard() {
+        self.keyboard = Keyboard()
+
+        // TMP.
+        self.keyboard.height
+            .asObservable()
+            .subscribe(onNext: { height in
+                NSLog("Keyboard height changed to: '\(height)'")
+            })
+            .disposed(by: self.disposeBag)
+        // TMP.
+        self.keyboard.state
+            .asObservable()
+            .subscribe(onNext: { state in
+                NSLog("Keyboard state changed to: '\(state)'")
             })
             .disposed(by: self.disposeBag)
     }
