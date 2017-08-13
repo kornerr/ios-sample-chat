@@ -22,21 +22,19 @@ class SendView: UIView {
     @IBOutlet private var sendButton: UIButton!
 
     private func setupSendView() {
-        NSLog("SendView.setup")
-
         // Report latest message.
         self.sendButton.rx.tap.subscribe(onNext: { [unowned self] _ in
             if (self.textField != nil) {
               self.lastMessage.value = self.textField!.text!
             }
         })
-        .disposed(by: disposeBag)
+        .disposed(by: self.disposeBag)
 
         // Erase text field.
         self.sendButton.rx.tap.subscribe(onNext: { [unowned self] _ in
             self.textField?.text = ""
         })
-        .disposed(by: disposeBag)
+        .disposed(by: self.disposeBag)
     }
 
 }
