@@ -72,9 +72,20 @@ class ChatView: UIView, UITableViewDataSource, UITableViewDelegate {
         self.tableView.delegate = self
 
         self.setupTableViewCellHeight()
-        
-        // Setup scrolling
+        self.setupTableViewScrolling()
+    }
+
+    private func setupTableViewScrolling() {
         self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
+
+        // Scroll to bottom upon showing/hiding keyboard.
+        self.scrollInsetter.signal
+            .asObservable()
+            .subscribe(onNext: { [unowned self] x in
+                NSLog("Scroll to bottom, because received signal '\(x)'")
+                self.scrollToBottom()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: - TABLE VIEW CELL HEIGHT
