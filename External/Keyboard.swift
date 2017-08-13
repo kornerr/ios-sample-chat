@@ -55,24 +55,20 @@ class Keyboard : NSObject {
     // MARK: - STATE
 
     func keyboardDidHide(notification: Notification) {
-        NSLog("Keyboard. did hide")
         self.state.value = .Hidden
     }
 
     func keyboardDidShow(notification: Notification) {
-        NSLog("Keyboard. did show")
         self.state.value = .Shown
     }
 
     // MARK: - HEIGHT
     
     func keyboardWillHide(notification: Notification) {
-        NSLog("Keyboard. will hide")
         self.height.value = 0
     }
 
     func keyboardWillShow(notification: Notification) {
-        NSLog("Keyboard. will show")
         let keyboardFrame =
             notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
         if let kbHeight = keyboardFrame?.cgRectValue.height {

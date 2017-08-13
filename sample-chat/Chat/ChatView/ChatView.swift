@@ -75,14 +75,17 @@ class ChatView: UIView, UITableViewDataSource, UITableViewDelegate {
         self.setupTableViewScrolling()
     }
 
+    private var keyboard: Keyboard!
+
     private func setupTableViewScrolling() {
         self.scrollInsetter = ScrollInsetter(scrollView: self.tableView)
+        self.keyboard = Keyboard()
 
         // Scroll to bottom upon showing/hiding keyboard.
-        self.scrollInsetter.signal
+        self.keyboard.state
             .asObservable()
-            .subscribe(onNext: { [unowned self] x in
-                NSLog("Scroll to bottom, because received signal '\(x)'")
+            .subscribe(onNext: { [unowned self] _ in
+                NSLog("Scroll to bottom, because keyboard state changed")
                 self.scrollToBottom()
             })
             .disposed(by: self.disposeBag)
