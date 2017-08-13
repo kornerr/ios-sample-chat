@@ -6,7 +6,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // MARK PUBLIC
+    // MARK: - PUBLIC
 
     var window: UIWindow?
 
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK PRIVATE
+    // MARK: - PRIVATE
 
     private var chatVC: ChatVC!
     private var chat: Chat!
@@ -32,23 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupApplication() {
         // Load SendView.
-        self.sendView =
-            Bundle.main.loadNibNamed(
-                "SendView",
-                owner: nil,
-                options: nil)?.first as! SendView
+        self.sendView = SendView.loadFromNib()
 
-        // ViewModel.
+        // VM.
         self.chat = Chat()
 
-        // View.
+        // VC.
         self.chatVC = ChatVC()
         self.window!.rootViewController = self.chatVC
 
         // Provide send view to chat VC.
         self.chatVC.sendView = self.sendView
 
-        // Sync view and viewmodel.
+        // Sync VC and VM.
         self.chat.messages
             .asObservable()
             .bind(to: self.chatVC.messages)
@@ -70,8 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Duplicate 'Human' messages by 'Bot'.
         self.chat.messages
             .asObservable()
+            // Messages exist.
             .filter { $0.count > 0 }
+            // Take the last message.
             .map { $0.last }
+            // Ignore 'Bot' messages.
+            .filter { $0!.author != "Bot" }
+            // Wait a bit.
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] msg in
                 var botMsg = ChatMessage()
